@@ -2,6 +2,7 @@
 
 import 'package:breakdown_buddy/models/userModel.dart';
 import 'package:breakdown_buddy/models/vehicleModel.dart';
+import 'package:breakdown_buddy/screens/user_services.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -66,14 +67,12 @@ class _AddVehicleState extends State<AddVehicle> {
     });
   }
 
-  
   void deleteVehicle(vehicleDetailsModel vehicle) {
-    
     _database.doc(vehicle.uid).delete().then((_) => {
-      setState(() {
-      vehicles.remove(vehicle);
-    }),
-    });
+          setState(() {
+            vehicles.remove(vehicle);
+          }),
+        });
   }
 
   @override
@@ -81,16 +80,23 @@ class _AddVehicleState extends State<AddVehicle> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(75, 57, 239, 0.911),
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
         title: Title(
             color: Colors.white,
-            child: Center(
-              child: Text('Vehicle Details',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w500,
-                    fontSize: 24.0,
-                  )),
-            )),
+            child: Text('Vehicle Details',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 24.0,
+                ))),
       ),
       backgroundColor: Colors.white,
       body: Padding(
@@ -100,7 +106,10 @@ class _AddVehicleState extends State<AddVehicle> {
           children: [
             Text(
               'Add Vehicle Details:',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Color.fromRGBO(75, 57, 239, 0.911)),
+              style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromRGBO(75, 57, 239, 0.911)),
             ),
             SizedBox(height: 16),
             TextField(
@@ -136,22 +145,43 @@ class _AddVehicleState extends State<AddVehicle> {
               keyboardType: TextInputType.number,
             ),
             SizedBox(height: 16),
-            ElevatedButton(
-                onPressed: () {
-                  addVehicle();
-                },
-                child: Text(
-                  'Add Vehicle',
-                  style: TextStyle(
-                    color: Color.fromRGBO(75, 57, 239, 0.911),
-                    fontSize: 15.0,
-                  ),
-                ),
-                style: ElevatedButton.styleFrom(
-                  foregroundColor: Color.fromRGBO(255, 255, 255, 0.91),
-                )
-                  
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                ElevatedButton(
+                    onPressed: () {
+                      addVehicle();
+                      // Navigator.of(context).push(MaterialPageRoute(builder: ((context) => ServiceList())));
+                    },
+                    child: Text(
+                      'Add Vehicle',
+                      style: TextStyle(
+                        color: Color.fromRGBO(75, 57, 239, 0.911),
+                        fontSize: 15.0,
+                      ),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                        foregroundColor: Color.fromRGBO(255, 255, 255, 0.91),
+                        minimumSize: Size(120, 45))),
+                ElevatedButton(
+                    onPressed: () {
+                      // addVehicle();
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: ((context) => ServiceList())));
+                    },
+                    child: Text(
+                      'Continue',
+                      style: TextStyle(
+                        color: Color.fromRGBO(75, 57, 239, 0.911),
+                        fontSize: 15.0,
+                      ),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                        foregroundColor: Color.fromRGBO(255, 255, 255, 0.91),
+                        minimumSize: Size(120, 45))),
+              ],
+            ),
+
             SizedBox(
               height: 16,
             ),
@@ -180,7 +210,11 @@ class _AddVehicleState extends State<AddVehicle> {
                           ),
                         ),
                       );
-                    }))
+                    })),
+
+            // SizedBox(
+            //   height: 30,
+            // ),
           ],
         ),
       ),

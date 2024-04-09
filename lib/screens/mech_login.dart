@@ -1,20 +1,18 @@
-// ignore_for_file: unused_field, unnecessary_new, unused_local_variable, prefer_const_constructors, body_might_complete_normally_nullable, unused_import
+// ignore_for_file: prefer_const_constructors, unnecessary_new, body_might_complete_normally_nullable
 
-import 'package:breakdown_buddy/screens/addvehicle.dart';
-import 'package:breakdown_buddy/screens/register.dart';
-import 'package:breakdown_buddy/screens/user_services.dart';
+import 'package:breakdown_buddy/screens/mech_signUp.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key, required String title});
+class MechLogin extends StatefulWidget {
+  const MechLogin({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<MechLogin> createState() => _MechLoginState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _MechLoginState extends State<MechLogin> {
   // form key
   final _formKey = GlobalKey<FormState>();
 
@@ -33,8 +31,8 @@ class _LoginScreenState extends State<LoginScreen> {
             .signInWithEmailAndPassword(email: email, password: password)
             .then((uid) => {
                   Fluttertoast.showToast(msg: 'Login Successful'),
-                  Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(builder: ((context) => AddVehicle())))
+                  // Navigator.of(context).pushReplacement(
+                  //     MaterialPageRoute(builder: ((context) => AddVehicle())))
                 });
       } on FirebaseAuthException catch (error) {
         Fluttertoast.showToast(msg: error.message!);
@@ -131,7 +129,6 @@ class _LoginScreenState extends State<LoginScreen> {
         ),
       ),
     );
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(75, 57, 239, 0.911),
@@ -209,7 +206,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: ((context) => SignUpScreen())));
+                                  builder: ((context) => MechSignUp())));
                         },
                         child: Text(
                           'SignUp',

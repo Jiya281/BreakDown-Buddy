@@ -25,7 +25,7 @@ class vehicleDetailsModel {
   //sending data to the server
   Map<String, dynamic> toMap() {
     return {
-      'uid':uid,
+      // 'uid':uid,
       'name': vehicleName,
       'model': vehicleModel,
       'number': vehicleNumber,
